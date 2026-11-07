@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+<title>Authentificateur</title>
+</head>
+<body>
+
+<!-- Verrouillage / création du coffre -->
+<section id="v-lock" hidden>
+  <h1>🔐 Authentificateur</h1>
+  <p id="lock-msg" class="muted"></p>
+  <input id="pw" type="password" placeholder="Mot de passe maître" autocomplete="off">
+  <input id="pw2" type="password" placeholder="Confirmer le mot de passe" autocomplete="off" hidden>
+  <button id="btn-unlock" class="primary"></button>
+  <p id="lock-err" class="err"></p>
+</section>
+
+<!-- Liste des codes -->
+<section id="v-main" hidden>
+  <header>
+    <input id="search" type="search" placeholder="Rechercher…">
+    <button id="btn-add" title="Ajouter">＋</button>
+    <button id="btn-settings" title="Paramètres">⚙</button>
+    <button id="btn-lock" title="Verrouiller">🔒</button>
+  </header>
+  <div id="list"></div>
+  <p id="empty" class="muted" hidden>Aucun compte. Cliquez sur ＋ pour en ajouter.</p>
+  <p id="toast" class="toast"></p>
+</section>
+
+<!-- Ajout -->
+<section id="v-add" hidden>
+  <header><button id="add-back">←</button><h2>Ajouter un compte</h2></header>
+  <h3>Webcam</h3>
+  <button id="btn-cam" class="primary">📷 Scanner un QR avec la webcam</button>
+  <h3>Image de QR code</h3>
+  <p class="muted">Choisissez une capture d'écran, ou collez-la avec Ctrl+V. Lecture 100 % locale.</p>
+  <button id="btn-qr">Choisir une image…</button>
+  <input id="file-qr" type="file" accept="image/*" multiple hidden>
+  <h3>Lien <code>otpauth://</code> ou export Google Authenticator</h3>
+  <textarea id="uri" rows="3" placeholder="otpauth://totp/…  ou  otpauth-migration://offline?data=…"></textarea>
+  <button id="btn-add-uri">Importer le lien</button>
+  <h3>Saisie manuelle</h3>
+  <input id="m-issuer" placeholder="Service (ex. GitHub)">
+  <input id="m-name" placeholder="Compte (ex. moi@mail.com)">
+  <input id="m-secret" placeholder="Clé secrète (base32)" autocomplete="off">
+  <details><summary>Options avancées</summary>
+    <label>Algorithme <select id="m-alg"><option>SHA1</option><option>SHA256</option><option>SHA512</option></select></label>
+    <label>Chiffres <select id="m-digits"><option>6</option><option>8</option></select></label>
+    <label>Période (s) <input id="m-period" type="number" value="30" min="1"></label>
+  </details>
+  <button id="btn-add-manual" class="primary">Ajouter</button>
+  <p id="add-err" class="err"></p>
+</section>
+
+<!-- Paramètres -->
+<section id="v-settings" hidden>
+  <header><button id="set-back">←</button><h2>Paramètres</h2></header>
+  <label>Verrouillage automatique après
+    <select id="autolock">
+      <option value="1">1 min</option><option value="5">5 min</option>
+      <option value="15">15 min</option><option value="60">1 h</option><option value="0">à la fermeture du navigateur</option>
+    </select>
+  </label>
+  <h3>Sauvegarde</h3>
+  <p class="muted">Le fichier exporté est chiffré avec votre mot de passe maître. Gardez-en une copie hors de ce PC.</p>
+  <button id="btn-export">Exporter une sauvegarde chiffrée</button>
+  <button id="btn-import">Importer une sauvegarde…</button>
+  <input id="file-import" type="file" accept=".json" hidden>
+  <h3>Zone dangereuse</h3>
+  <button id="btn-wipe" class="danger">Effacer tout le coffre</button>
+  <p id="set-msg" class="muted"></p>
+</section>
+
+<script src="jsQR.js"></script>
+<script type="module" src="popup.js"></script>
+</body>
+</html>

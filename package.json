@@ -1,0 +1,13 @@
+{
+  "name": "authentificateur-local",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Extension TOTP locale pour Opera GX / Chromium",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test",
+    "icons": "node scripts/make-icons.mjs",
+    "package": "node scripts/package.mjs"
+  }
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="cam.css">
+<title>Scanner un QR code</title>
+</head>
+<body>
+<main>
+  <h1>📷 Scanner avec la webcam</h1>
+  <p class="muted">Présentez le QR code de l'écran du téléphone devant la webcam. Rien n'est enregistré : l'image est analysée en direct, localement. Pour un export Google Authenticator avec plusieurs QR, passez-les l'un après l'autre.</p>
+  <video id="video" playsinline muted></video>
+  <canvas id="canvas" hidden></canvas>
+  <p id="status" class="status">Démarrage de la caméra…</p>
+  <ul id="log"></ul>
+  <button id="stop">Terminer</button>
+</main>
+<script src="jsQR.js"></script>
+<script type="module" src="cam.js"></script>
+</body>
+</html>
